@@ -27,7 +27,7 @@
 # POSSIBILITY OF SUCH DAMAGE.
 ###
 
-import plugin
+from . import plugin
 
 import supybot.conf as conf
 import supybot.utils as utils
@@ -45,8 +45,7 @@ class CurrencyCommand(registry.String):
     def setValue(self, s):
         m = plugin.Currency.currencyCommands
         if s not in m:
-            raise registry.InvalidRegistryValue,\
-                  format('Command must be one of %L.', m)
+            raise registry.InvalidRegistryValue(format('Command must be one of %L.', m))
         registry.String.setValue(self, s)
 
 Currency = conf.registerPlugin('Currency')
