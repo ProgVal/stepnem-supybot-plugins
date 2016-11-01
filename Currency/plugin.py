@@ -65,8 +65,8 @@ class Currency(callbacks.Privmsg):
             irc.error(self._symbolError, Raise=True)
         url = 'http://www.xe.com/ucc/convert.cgi?Amount=%s&From=%s&To=%s'
         try:
-            text = utils.web.getUrl(url % (number, curr1, curr2))
-        except utils.web.Error, e:
+            text = utils.web.getUrl(url % (number, curr1, curr2)).decode()
+        except utils.web.Error as e:
             irc.error(str(e), Raise=True)
         err = self._xeCurrError.search(text)
         if err is not None:
@@ -98,8 +98,8 @@ class Currency(callbacks.Privmsg):
         url = r'http://finance.yahoo.com/d/quotes.csv?'\
               r's=%s%s=X&f=sl1d1t1ba&e=.csv' % (curr1, curr2)
         try:
-            text = utils.web.getUrl(url)
-        except utils.web.Error, e:
+            text = utils.web.getUrl(url).decode()
+        except utils.web.Error as e:
             irc.error(str(e), Raise=True)
         if 'N/A' in text:
             irc.error('You used an incorrect currency symbol.', Raise=True)
