@@ -87,7 +87,6 @@ import UserList
 import base64
 import cgi
 import urllib
-import exceptions
 import copy
 import re
 import socket
@@ -118,7 +117,7 @@ except:
 ################################################################################
 # Exceptions
 ################################################################################
-class Error(exceptions.Exception):
+class Error(Exception):
     def __init__(self, msg):
         self.msg = msg
     def __str__(self):
@@ -1880,7 +1879,7 @@ def cleanDate(d, first = 0):
         if d[2] > months[d[1]] + leap:
             raise ValueError, "day out of range"
 
-class UnderflowError(exceptions.ArithmeticError):
+class UnderflowError(ArithmeticError):
     pass
 
 def debugHeader(title):
